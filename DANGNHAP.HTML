@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ĐĂNG NHẬP / ĐĂNG KÍ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background-image: url('thuyền trên sông.gif'); 
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 120px 20px 20px 120px;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+            position: relative;
+            overflow: hidden;
+            width: 768px;
+            max-width: 100%;
+            min-height: 480px;
+        }
+        .form-container {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            transition: all 0.6s ease-in-out;
+            padding: 0 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-container {
+            left: 0;
+            width: 50%;
+            z-index: 2;
+        }
+        .register-container {
+            left: 0;
+            width: 50%;
+            opacity: 0;
+            z-index: 1;
+            display: none;
+        }
+        .register-container form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .register-container h2 {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 22px;
+            text-align: center;
+            
+        }
+        .register-container .form-group {
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            border-radius: 20px;
+            padding: 10px 20px;
+            margin: 8px 0;
+            width: 100%;
+        }
+        .register-container .form-group input {
+            background: none;
+            border: none;
+            padding: 10px 10px;
+            width: 100%;
+            font-size: 14px;
+        }
+        .register-container .form-group i {
+            color: #777;
+            margin-right: 10px;
+        }
+        .register-container button.submit-btn {
+            margin-top: 20px;
+            width: 100%;
+            border-radius: 20px;
+            border: 1px solid #4d8cff;
+            background-color: #4d8cff;
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 12px 45px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform 80ms ease-in;
+        }
+        .register-container button.submit-btn:active {
+            transform: scale(0.95);
+        }
+
+        .register-container button.submit-btn:focus {
+            outline: none;
+        }
+        .overlay-container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            transition: transform 0.6s ease-in-out;
+            z-index: 100;
+            border-radius: 120px 20px 20px 120px; /* Thêm bo góc */
+        }
+        .overlay {
+            background-image: url('thuyền.gif');
+            /* background: #4d8cff;*/
+            color: #fff;
+            position: relative;
+            left: -100%;
+            height: 100%;
+            width: 200%;
+            transform: translateX(0);
+            transition: transform 0.6s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-top-left-radius: 120px;
+            border-bottom-left-radius: 120px;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+        .overlay-panel {
+
+            width: 50%;
+            padding: 0 40px;
+        }
+        .overlay-panel.overlay-right button.ghost {
+    background-color: #fff; 
+    color: #4d8cff; 
+    border-color: #fff; 
+}
+        .overlay h2 {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .overlay p {
+            font-size: 14px;
+            font-weight: 100;
+            line-height: 20px;
+            letter-spacing: 0.5px;
+            margin: 20px 0 30px;
+        }
+        .overlay button {
+            border-radius: 20px;
+            border: 1px solid #fff;
+            background-color: transparent;
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 12px 45px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform 80ms ease-in;
+        }
+     .overlay button:active {
+            transform: scale(0.95);
+        }
+
+        .overlay button:focus {
+            outline: none;
+        }
+        .login-container form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .login-container h2 {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 22px;
+            text-align: center;
+        }
+        .login-container .form-group {
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            border-radius: 20px;
+            padding: 10px 20px;
+            margin: 8px 0;
+            width: 100%;
+        }
+        .login-container .form-group input {
+            background: none;
+            border: none;
+            padding: 10px 10px;
+            width: 100%;
+            font-size: 14px;
+        }
+        .login-container .form-group i {
+            color: #777;
+            margin-right: 10px;
+        }
+        .login-container a.forgot {
+            font-size: 12px;
+            text-decoration: none;
+            color: #333;
+            margin: 15px 0;
+        }
+        .login-container button.submit-btn {
+            margin-top: 20px;
+            width: 100%;
+            border-radius: 20px;
+            border: 1px solid #4d8cff;
+            background-color: #4d8cff;
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 12px 45px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform 80ms ease-in;
+            
+        }
+
+        .login-container button.submit-btn:active {
+            transform: scale(0.95);
+        }
+
+        .login-container button.submit-btn:focus {
+            outline: none;
+        }
+        .container.right-panel-active .login-container {
+            transform: translateX(100%);
+        }
+
+        .container.right-panel-active .overlay-container {
+            transform: translateX(-100%);
+        }
+
+        .container.right-panel-active .register-container {
+          display: flex !important; 
+          transform: translateX(100%);
+            opacity: 1;
+            z-index: 5;
+            
+        }
+        .container.right-panel-active .overlay {
+            transform: translateX(50%);
+        }
+
+        .container.right-panel-active .overlay-left {
+            transform: translateX(0);
+        }
+
+        .container.right-panel-active .overlay-right {
+            transform: translateX(20%);
+        }
+        .container.right-panel-active .login-container {
+    display: none;
+}
+        .overlay-left {
+            transform: translateX(-20%);
+        }
+
+        .overlay-right {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="form-container register-container">
+<form id="register-form" method="POST" action="DN.php">
+    <h2>Đăng ký</h2>
+    <div class="form-group">
+        <input type="text" name="reg_name" placeholder="Tên người dùng" id="register-username" required>
+        <i class="fas fa-user"></i>
+    </div>
+    <div class="form-group">
+        <input type="email" name="reg_email" placeholder="Email" id="register-email" required>
+        <i class="fas fa-envelope"></i>
+    </div>
+    <div class="form-group">
+        <input type="password" name="reg_password" placeholder="Mật khẩu" id="register-password" required>
+        <i class="fas fa-lock"></i>
+    </div>
+    <button class="submit-btn" type="submit" name="register">Đăng ký</button>
+</form>
+        </div>
+        <div class="form-container login-container">
+<form id="login-form" action="DN.php" method="POST">
+    <h2>Đăng nhập</h2>
+    
+    <div class="form-group">
+        <input type="text" name="username" placeholder="Tên người dùng hoặc Email" id="login-username" required>
+        <i class="fas fa-user"></i>
+    </div>
+
+    <div class="form-group">
+        <input type="password" name="password" placeholder="Mật khẩu" id="login-password" required>
+        <i class="fas fa-lock"></i>
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="admin_code" placeholder="Admin" id="login-admin" required>
+        <i class="fas fa-lock"></i>
+    </div>
+
+    <a href="#" class="forgot">Quên mật khẩu?</a>
+    <button class="submit-btn" type="submit">Đăng nhập</button>
+</form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h2>Chào mừng trở lại!</h2>
+                    <p>Để tiếp tục, vui lòng đăng nhập bằng tài khoản của bạn</p>
+                    <button class="ghost" id="login">Đăng nhập</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h2>Bạn chưa có tài khoản?</h2>
+                    <p>Tham gia với chúng tôi và bắt đầu hành trình của bạn!</p>
+                    <button class="ghost" id="register">Đăng ký</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const container = document.getElementById('container');
+        const registerBtn = document.getElementById('register');
+        const loginBtn = document.getElementById('login');
+
+        if (registerBtn) {
+            registerBtn.addEventListener('click', () => {
+                container.classList.add("right-panel-active");
+            });
+        }
+
+        if (loginBtn) {
+            loginBtn.addEventListener('click', () => {
+                container.classList.remove("right-panel-active");
+            });
+        }
+    </script>
+    <script src="login.js"></script>
+</body>
+</html>
